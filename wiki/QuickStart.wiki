@@ -1,4 +1,4 @@
-#summary An instruction of deploying iMapReduce and running an example algorithm.
+#summary An quick start of deploying iMapReduce and running an example algorithm.
 
 = Introduction =
 
