@@ -3,6 +3,7 @@
 = API =
 
 To specify an iMapReduce program, users should implement the following two interfaces instead of Mapper and Reducer:
+
 * {{{IterativeMapper<InStateK, InStateV, InStaticK, InStaticV, OutStateK, OutStateV>}}}
 
 * {{{IterativeReducer<InStateK, InStateV, OutStateK, OutStateV>}}}
