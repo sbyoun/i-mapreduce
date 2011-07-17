@@ -53,4 +53,4 @@ Users also specify their iterative process through setting the following system 
 
  * `job.setInt("mapred.iterative.stop.iteration", 50);`
 
-* `job.setBoolean("mapred.iterative.firstjob", true);`
+ * `job.setBoolean("mapred.iterative.firstjob", true);`
