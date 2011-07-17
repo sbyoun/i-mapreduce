@@ -6,51 +6,51 @@ Since our iMapReduce implementation is based on Hadoop, its provided APIs are fo
 
 To specify an iMapReduce program, users should implement the following two interfaces instead of Mapper and Reducer:
 
-* `public interface IterativeMapper<InStateK, InStateV, InStaticK, InStaticV, OutStateK, OutStateV>`
+ * `public interface IterativeMapper<InStateK, InStateV, InStaticK, InStaticV, OutStateK, OutStateV>`
 
-* `public interface IterativeReducer<InStateK, InStateV, OutStateK, OutStateV>`
+ * `public interface IterativeReducer<InStateK, InStateV, OutStateK, OutStateV>`
 
 IterativeMapper has map function interface:
 
-* `void map(InStateK key, InStateV value, InStaticK datakey, InStaticV dataval, OutputCollector<OutStateK, OutStateV> output, Reporter report);`
+ * `void map(InStateK key, InStateV value, InStaticK datakey, InStaticV dataval, OutputCollector<OutStateK, OutStateV> output, Reporter report);`
 
 And users should return the DFS path of the initial state data and static data through
 
-* `Path[] initStateData();`
+ * `Path[] initStateData();`
 
-* `Path initStaticData();`
+ * `Path initStaticData();`
 
 The returned state data path is actually a list, users can designate more than one initial state data file
 
 After each iteration, the framework will invoke the following function, where users can write their own codes to do some recording or summarizing work. (*Optional*)
 
-* `boolean iterate();`
+ * `boolean iterate();`
 
 If return false, the iterative process will terminate, otherwise continue.
 
 Correspondingly, IterativeReducer has the following two interfaces without the specification of initial state data path and static data path.
 
-* `void reduce(InStateK key, InStateV value, OutputCollector<OutStateK, OutStateV> output, Reporter report);`
+ * `void reduce(InStateK key, InStateV value, OutputCollector<OutStateK, OutStateV> output, Reporter report);`
 
-* `boolean iterate();`
+ * `boolean iterate();`
 
 
 = System Parameters =
 
 Users also specify their iterative process through setting the following system parameters.
 
-* `job.setBoolean("mapred.job.iterative", true);`
-	
-* `job.setBoolean("mapred.iterative.reducesync", true);`
+ * `job.setBoolean("mapred.job.iterative", true);`
+ 
+ * `job.setBoolean("mapred.iterative.reducesync", true);`
 
-* `job.setBoolean("mapred.iterative.mapsync", true);`
+ * `job.setBoolean("mapred.iterative.mapsync", true);`
 
-* `job.set("mapred.iterative.jointype", "one2one");`
+ * `job.set("mapred.iterative.jointype", "one2one");`
 
-* `job.setInt("mapred.iterative.partitions", partitions);`
+ * `job.setInt("mapred.iterative.partitions", partitions);`
 
-* `job.setInt("mapred.iterative.snapshot.interval", 10);`
+ * `job.setInt("mapred.iterative.snapshot.interval", 10);`
 
-* `job.setInt("mapred.iterative.stop.iteration", 50);`
+ * `job.setInt("mapred.iterative.stop.iteration", 50);`
 
 * `job.setBoolean("mapred.iterative.firstjob", true);`
