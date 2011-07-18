@@ -1,6 +1,6 @@
 #summary An brief introduction of iMapReduce.
 
 
-<img src="http://rio.ecs.umass.edu/~yzhang/pic/imr.png " width=500/>
+<img src="http://rio.ecs.umass.edu/~yzhang/pic/imr.png " width=300/>
 
-<img src="http://rio.ecs.umass.edu/~yzhang/pic/itermr.png " width=500/>
+<img src="http://rio.ecs.umass.edu/~yzhang/pic/itermr.png " width=300/>
