@@ -3,3 +3,6 @@
 [http://rio.ecs.umass.edu/~yzhang/pic/imr.png http://rio.ecs.umass.edu/~yzhang/pic/imr.png]
 
 [http://rio.ecs.umass.edu/~yzhang/pic/itermr.png http://rio.ecs.umass.edu/~yzhang/pic/itermr.png]
+
+
+<img src="http://rio.ecs.umass.edu/~yzhang/pic/imr.png " width=50 height=30 />
