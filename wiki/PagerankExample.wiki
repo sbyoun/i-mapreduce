@@ -135,7 +135,7 @@ public class PageRankMap extends MapReduceBase implements IterativeMapper<IntWri
 	public Path[] initStateData() throws IOException {
 		Path remotePath = new Path(this.subRankDir + "/subrank" + taskid);
 		Path localPath = new Path("/tmp/iterativehadoop/statedata");
-		fs.copyToLocalFile(remotePath, localPath);
+		fs.copyToLocalFile(remotePath, localPath);    //copy to local for fast access
 		Path[] paths = new Path[1];
 		paths[0] = localPath;
 		return paths;
@@ -145,7 +145,7 @@ public class PageRankMap extends MapReduceBase implements IterativeMapper<IntWri
 	public Path initStaticData() throws IOException {
 		Path remotePath = new Path(this.subGraphsDir + "/subgraph" + taskid);
 		Path localPath = new Path("/tmp/iterativehadoop/staticdata");
-		fs.copyToLocalFile(remotePath, localPath);
+		fs.copyToLocalFile(remotePath, localPath);    //copy to local for fast access
 		return localPath;
 	}
 }
