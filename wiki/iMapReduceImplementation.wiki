@@ -9,7 +9,7 @@ iMapReduce is implemented based on Hadoop 0.19.2 and HOP. According to the iMapR
 
 To achieve the above goals, we mainly modified the following classes in Hadoop and HOP.
 
- * org.apache.hadoop.mapred.MapTask
+ * [http://code.google.com/p/i-mapreduce/source/browse/trunk/src/mapred/org/apache/hadoop/mapred/MapTask.java org.apache.hadoop.mapred.MapTask]
  * org.apache.hadoop.mapred.ReduceTask
  * org.apache.hadoop.mapred.buffer.net.BufferExchangeSink
  * org.apache.hadoop.mapred.TaskTracker
