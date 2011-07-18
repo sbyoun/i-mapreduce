@@ -40,6 +40,8 @@ Correspondingly, IterativeReducer has the following two interfaces without the s
 Users also specify their iterative process through setting the following system parameters.
 
  * `job.setBoolean("mapred.job.iterative", true);`
+
+
  
  * `job.setBoolean("mapred.iterative.reducesync", true);`
 
