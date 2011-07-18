@@ -4,7 +4,7 @@ Before writing the pagerank program, users should use our provided "preprocess" 
 
 `$HADOOP jar example.jar preprocess <in_statedata> <in_staticdata> <out_statedata> <out_staticdata> <statevalueclass> <partitions>`
 
-<out_statedata> and <out_staticdata> are the DFS paths of the distributed initial state data path and the static data path.
+`<out_statedata>` and `<out_staticdata>` are the DFS paths of the distributed initial state data path and the static data path.
 
 Then, like writing programs in Hadoop, we should write a main program, as well as Mapper class and Reducer class.
 
