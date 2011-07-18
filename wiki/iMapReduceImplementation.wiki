@@ -3,10 +3,14 @@
 iMapReduce is implemented based on Hadoop 0.19.2 and HOP. According to the iMapReduce idea, what we need to do is 
 
  # Make task persistent, so that the map/reduce task are always switching its status between working or suspending. As long as there is input coming, the map/reduce tasks start processing them. After finishing processing, they are suspended for the new coming input.
+ # Within the same job or crossing multiple jobs, connect the reduce tasks to the map tasks based on some mapping rule (one-to-one or one-to-all). The reduce tasks' output can be sent to a single map task or can be broadcast to all map tasks.
+ # Schedule the map task with taskid _t_ to the worker where its static data _i_ locate, at meantime, shuffle the state data _i_ to the reduce task with taskid _t_. We connect the reduce task to the map task with the same taskid _t_, so that the state data will always go to the map task where its corresponding static data locate.
 
 
+To achieve the above goals, we mainly modified the following classes in Hadoop and HOP.
 
-
-
- # Within the same job, connect reduce tasks to map tasks based on some mapping rule (one-to-one or one-to-all).
- # 
+ * org.apache.hadoop.mapred.MapTask
+ * org.apache.hadoop.mapred.ReduceTask
+ * org.apache.hadoop.mapred.buffer.net.BufferExchangeSink
+ * org.apache.hadoop.mapred.TaskTracker
+ * org.apache.hadoop.mapred.iMapReduceTaskScheduler
