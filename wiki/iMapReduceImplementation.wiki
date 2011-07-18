@@ -10,7 +10,8 @@ iMapReduce is implemented based on Hadoop 0.19.2 and HOP. According to the iMapR
 To achieve the above goals, we mainly modified the following classes in Hadoop and HOP.
 
  * [http://code.google.com/p/i-mapreduce/source/browse/trunk/src/mapred/org/apache/hadoop/mapred/MapTask.java org.apache.hadoop.mapred.MapTask]
- * org.apache.hadoop.mapred.ReduceTask
- * org.apache.hadoop.mapred.buffer.net.BufferExchangeSink
- * org.apache.hadoop.mapred.TaskTracker
- * org.apache.hadoop.mapred.iMapReduceTaskScheduler
+ * [http://code.google.com/p/i-mapreduce/source/browse/trunk/src/mapred/org/apache/hadoop/mapred/ReduceTask.java org.apache.hadoop.mapred.ReduceTask]
+ * [http://code.google.com/p/i-mapreduce/source/browse/trunk/src/mapred/org/apache/hadoop/mapred/buffer/net/BufferExchangeSink.java org.apache.hadoop.mapred.buffer.net.BufferExchangeSink]
+ * [http://code.google.com/p/i-mapreduce/source/browse/trunk/src/mapred/org/apache/hadoop/mapred/buffer/impl/StaticData.java org.apache.hadoop.mapred.buffer.impl.StaticData]
+ * [http://code.google.com/p/i-mapreduce/source/browse/trunk/src/mapred/org/apache/hadoop/mapred/TaskTracker.java org.apache.hadoop.mapred.TaskTracker]
+ * [http://code.google.com/p/i-mapreduce/source/browse/trunk/src/mapred/org/apache/hadoop/mapred/iMapReduceTaskScheduler.java org.apache.hadoop.mapred.iMapReduceTaskScheduler]
