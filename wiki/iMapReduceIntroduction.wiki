@@ -1,3 +1,5 @@
 #summary An brief introduction of iMapReduce.
 
-[http://code.google.com/ http://rio.ecs.umass.edu/~yzhang/pic/imr.png]
+[http://rio.ecs.umass.edu/~yzhang/pic/imr.png http://rio.ecs.umass.edu/~yzhang/pic/imr.png]
+
+[http://rio.ecs.umass.edu/~yzhang/pic/itermr.png http://rio.ecs.umass.edu/~yzhang/pic/itermr.png]
