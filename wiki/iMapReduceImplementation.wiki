@@ -1,13 +1,12 @@
 #summary An overview of the iMapReduce implementation in Hadoop.
 
-= Introduction =
+iMapReduce is implemented based on Hadoop 0.19.2 and HOP. According to the iMapReduce idea, what we need to do is 
 
-Add your content here.
+ # Make task persistent, so that the map/reduce task are always switching its status between working or suspending. As long as there is input coming, the map/reduce tasks start processing them. After finishing processing, they are suspended for the new coming input.
 
 
-= Details =
 
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
+
+
+ # Within the same job, connect reduce tasks to map tasks based on some mapping rule (one-to-one or one-to-all).
+ # 
