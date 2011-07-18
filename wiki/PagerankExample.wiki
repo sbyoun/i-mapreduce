@@ -5,9 +5,20 @@ Like implementing algorithms in Hadoop, we should write a main program, as well 
 = Main =
 
 {{{
+public class PageRank extends Configured implements Tool {
+	private String input;
+	private String output;
+	private String subGraphDir;
+	private String subRankDir;
+        private int partitions;
+	
+	//damping factor
+	public static final double DAMPINGFAC = 0.8;
+	public static final double RETAINFAC = 0.2;
+
+	private int pagerank() throws IOException{
 	    JobConf job = new JobConf(getConf());
-	    String jobname = "pagerank";
-	    job.setJobName(jobname);
+	    job.setJobName("pagerank");
        
 	    job.set(MainDriver.SUBGRAPH_DIR, subGraphDir);
 	    job.set(MainDriver.SUBRANK_DIR, subRankDir);
@@ -16,36 +27,56 @@ Like implementing algorithms in Hadoop, we should write a main program, as well 
 	    FileOutputFormat.setOutputPath(job, new Path(output));
 	    job.setOutputFormat(TextOutputFormat.class);
 	    
-	    int ttnum = Util.getTTNum(job);
-	        
 	    //set for iterative process   
 	    job.setBoolean("mapred.job.iterative", true);  
-	    job.setLong("mapred.iterative.reduce.window", -1);		//set -1 more accurate, ow more stable
 	    job.setBoolean("mapred.iterative.reducesync", true);
-	    //job.setBoolean("mapred.iterative.mapsync", true);
 	    job.set("mapred.iterative.jointype", "one2one");
-	    job.setInt("mapred.iterative.ttnum", ttnum);
+	    job.setInt("mapred.iterative.partitions", partitions);
 	    job.setInt("mapred.iterative.snapshot.interval", 10);
 	    job.setInt("mapred.iterative.stop.iteration", 50);
-	    job.setBoolean("mapred.iterative.firstjob", true);
 	    
 	    job.setJarByClass(PageRank.class);
 	    job.setMapperClass(PageRankMap.class);	
 	    job.setReducerClass(PageRankReduce.class);
-	    job.setDataKeyClass(IntWritable.class);
-	    job.setDataValClass(Text.class);			//set priority class
+	    job.setDataKeyClass(IntWritable.class);            //set static data key class
+	    job.setDataValClass(Text.class);                   //set static data value class
 	    job.setMapOutputKeyClass(IntWritable.class);
 	    job.setMapOutputValueClass(DoubleWritable.class);
 	    job.setOutputKeyClass(IntWritable.class);
-	    job.setOutputValueClass(DoubleWritable.class);
-	    
+	    job.setOutputValueClass(DoubleWritable.class);    
 	    job.setPartitionerClass(UniDistIntPartitioner.class);
 
-	    job.setNumMapTasks(ttnum);
-	    job.setNumReduceTasks(ttnum);
+	    job.setNumMapTasks(partitions);
+	    job.setNumReduceTasks(partitions);
 	    
 	    JobClient.runJob(job);
+	    return 0;
+	}
 
+	@Override
+	public int run(String[] args) throws Exception {
+		if (args.length != 5) {
+		      System.err.println("Usage: pagerank <indir> <outdir> <subrank> <subgraph> <partitions>");
+		      System.exit(2);
+		}
+	    
+		input = args[0];
+	        output = args[1];
+	        subRankDir = args[2];
+	        subGraphDir = args[3];  
+                partitions = Integer.parseInt(args[4]);  
+    
+	        pagerank();
+	    
+		return 0;
+	}
+
+
+	public static void main(String[] args) throws Exception {
+		int res = ToolRunner.run(new Configuration(), new PageRank(), args);
+	    System.exit(res);
+	}
+}
 }}}
 
 
