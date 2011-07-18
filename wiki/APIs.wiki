@@ -41,18 +41,32 @@ Users also specify their iterative process through setting the following system 
 
  * `job.setBoolean("mapred.job.iterative", true);`
 
-
+This submitted job is an iMapReduce job. Otherwise, it is an ordinary Hadoop MapReduce job as usual.
  
  * `job.setBoolean("mapred.iterative.reducesync", true);`
 
+The reducers are activated when all the mappers are completed. Otherwise, we can execute them asynchronously if possible.
+
  * `job.setBoolean("mapred.iterative.mapsync", true);`
+
+The mappers are activated synchronously as the normal MapReduce job. This is useful for Kmeans-like algorithm, since we need all the reducers' result (all the updated centroids) to perform map.
 
  * `job.set("mapred.iterative.jointype", "one2one");`
 
+The state data and the static data are joined in a "one-to-one" manner, say joining on the same key. Otherwise, we can set it "one2all" in order to satisfy some requirements.
+
  * `job.setInt("mapred.iterative.partitions", partitions);`
 
- * `job.setInt("mapred.iterative.snapshot.interval", 10);`
+The data are split into some number of partitions, which is equal to the number of map-reduce task pairs.
+
+ * `job.setInt("mapred.iterative.snapshot.interval", 5);`
+
+The framework generates a result snapshot after every 5 iterations.
 
  * `job.setInt("mapred.iterative.stop.iteration", 50);`
 
+The iterative process will terminate after 50 iterations.
+
  * `job.setBoolean("mapred.iterative.firstjob", true);`
+
+For multiple job case, we should specify the first job, where the initial data is injected.
