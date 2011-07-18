@@ -1,13 +1,56 @@
 #summary An example program showing how to implement Pagerank in iMapReduce.
 
-= Introduction =
+Like implementing algorithms in Hadoop, we should write a main program, as well as Mapper class and Reducer class.
 
-Add your content here.
+= Main =
+
+{{{
+	    JobConf job = new JobConf(getConf());
+	    String jobname = "pagerank";
+	    job.setJobName(jobname);
+       
+	    job.set(MainDriver.SUBGRAPH_DIR, subGraphDir);
+	    job.set(MainDriver.SUBRANK_DIR, subRankDir);
+    
+	    FileInputFormat.addInputPath(job, new Path(input));
+	    FileOutputFormat.setOutputPath(job, new Path(output));
+	    job.setOutputFormat(TextOutputFormat.class);
+	    
+	    int ttnum = Util.getTTNum(job);
+	        
+	    //set for iterative process   
+	    job.setBoolean("mapred.job.iterative", true);  
+	    job.setLong("mapred.iterative.reduce.window", -1);		//set -1 more accurate, ow more stable
+	    job.setBoolean("mapred.iterative.reducesync", true);
+	    //job.setBoolean("mapred.iterative.mapsync", true);
+	    job.set("mapred.iterative.jointype", "one2one");
+	    job.setInt("mapred.iterative.ttnum", ttnum);
+	    job.setInt("mapred.iterative.snapshot.interval", 10);
+	    job.setInt("mapred.iterative.stop.iteration", 50);
+	    job.setBoolean("mapred.iterative.firstjob", true);
+	    
+	    job.setJarByClass(PageRank.class);
+	    job.setMapperClass(PageRankMap.class);	
+	    job.setReducerClass(PageRankReduce.class);
+	    job.setDataKeyClass(IntWritable.class);
+	    job.setDataValClass(Text.class);			//set priority class
+	    job.setMapOutputKeyClass(IntWritable.class);
+	    job.setMapOutputValueClass(DoubleWritable.class);
+	    job.setOutputKeyClass(IntWritable.class);
+	    job.setOutputValueClass(DoubleWritable.class);
+	    
+	    job.setPartitionerClass(UniDistIntPartitioner.class);
+
+	    job.setNumMapTasks(ttnum);
+	    job.setNumReduceTasks(ttnum);
+	    
+	    JobClient.runJob(job);
+
+}}}
 
 
-= Details =
+= Map =
 
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
+
+
+== Reduce ==
