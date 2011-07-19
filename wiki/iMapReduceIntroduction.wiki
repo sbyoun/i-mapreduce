@@ -8,9 +8,7 @@ Iterative computation is pervasive in many applications such as data mining or s
 == Limitations of MapReduce Iterative Implementations  ==
 
  # The operations in each iteration are the same. Nevertheless, MapReduce implementation starts a new job for each iteration, which involves multiple task initializations and cleanups, even though these tasks perform the same operations. Moreover, these jobs have to load the input data from DFS and dump the output data to DFS repeatedly. These can result in the unnecessary *scheduling overhead*.
-
  # To maintain the adjacency information, it is shuffled in each iteration between maps and reduces, despite the fact that it remains the same during all iterations. An alternative approach is to run an additional MapReduce job to perform a join operation between the static adjacency data and the dynamic iterated data before each iteration. Both of these methods will result in the unnecessary *communication overhead*.
-
  # The map tasks in an iteration cannot be started before finishing all the reduce tasks in the previous iteration. The main loop in the MapReduce implementation requires the completion of previous iteration job before starting the next iteration job. However, the map tasks should start as soon as their input data are available. This limitation results in the unnecessary *synchronization overhead*.
 
 == Iterative Processing ==
