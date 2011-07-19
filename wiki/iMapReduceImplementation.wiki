@@ -12,11 +12,11 @@ To achieve the above goals, we mainly modified the following classes in Hadoop a
  * [http://code.google.com/p/i-mapreduce/source/browse/trunk/src/mapred/org/apache/hadoop/mapred/MapTask.java org.apache.hadoop.mapred.MapTask]
  * [http://code.google.com/p/i-mapreduce/source/browse/trunk/src/mapred/org/apache/hadoop/mapred/ReduceTask.java org.apache.hadoop.mapred.ReduceTask]
 
-The map/reduce task is modified as persistent task. It enters an internal loop after the initial data are processed, so that it keeps alive and will not terminate after finishing processing the assigned data.
+The map/reduce task is modified as persistent task. It enters an internal loop after the initial data are processed, so that it keeps alive and will not terminate after finishing processing the assigned data. In the map task, according to one-to-one join or one-to-all join, it will join the state data record and the static data records before providing them to the map operation.
 
  * [http://code.google.com/p/i-mapreduce/source/browse/trunk/src/mapred/org/apache/hadoop/mapred/buffer/net/BufferExchangeSink.java org.apache.hadoop.mapred.buffer.net.BufferExchangeSink]
 
-It contains a data receiving thread. The thread will notify the suspended map/reduce task to process the input data after some data are received. In the map task, according to one-to-one join or one-to-all join, it will join the state data record and the static data records before providing them to the map operation.
+It contains a data receiving thread. The thread will notify the suspended map/reduce task to process the input data after some data are received. 
 
  * [http://code.google.com/p/i-mapreduce/source/browse/trunk/src/mapred/org/apache/hadoop/mapred/buffer/impl/StaticData.java org.apache.hadoop.mapred.buffer.impl.StaticData]
 
