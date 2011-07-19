@@ -11,7 +11,21 @@ To achieve the above goals, we mainly modified the following classes in Hadoop a
 
  * [http://code.google.com/p/i-mapreduce/source/browse/trunk/src/mapred/org/apache/hadoop/mapred/MapTask.java org.apache.hadoop.mapred.MapTask]
  * [http://code.google.com/p/i-mapreduce/source/browse/trunk/src/mapred/org/apache/hadoop/mapred/ReduceTask.java org.apache.hadoop.mapred.ReduceTask]
+
+The map/reduce task is modified as persistent task. It enters an internal loop after the initial data are processed, so that it keeps alive and will not terminate after finishing processing the assigned data.
+
  * [http://code.google.com/p/i-mapreduce/source/browse/trunk/src/mapred/org/apache/hadoop/mapred/buffer/net/BufferExchangeSink.java org.apache.hadoop.mapred.buffer.net.BufferExchangeSink]
+
+It contains a data receiving thread. The thread will notify the suspended map/reduce task to process the input data after some data are received.
+
  * [http://code.google.com/p/i-mapreduce/source/browse/trunk/src/mapred/org/apache/hadoop/mapred/buffer/impl/StaticData.java org.apache.hadoop.mapred.buffer.impl.StaticData]
+
+The static data are managed by this class.
+
  * [http://code.google.com/p/i-mapreduce/source/browse/trunk/src/mapred/org/apache/hadoop/mapred/TaskTracker.java org.apache.hadoop.mapred.TaskTracker]
+
+It runs an data fetching mechanism, so that it determines which reduce task should connect to which map task.
+
  * [http://code.google.com/p/i-mapreduce/source/browse/trunk/src/mapred/org/apache/hadoop/mapred/iMapReduceTaskScheduler.java org.apache.hadoop.mapred.iMapReduceTaskScheduler]
+
+It always schedules the tasks on the same worker with the same task ids. Since reduce task _i_ -> map task _i_, so that this can ensure local reduce-to-map connection.
