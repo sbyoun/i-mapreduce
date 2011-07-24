@@ -1,13 +1,4 @@
 #summary An quick start of deploying iMapReduce and running an example algorithm.
 
-= Introduction =
-
-Add your content here.
-
-
-= Details =
-
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
+ # download iMapReduce from [Downloads/hadoop-iMapReduce-0.1.tar.gz here].
+ # 
