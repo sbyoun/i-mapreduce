@@ -1,4 +1,7 @@
 #summary An quick start of deploying iMapReduce and running an example algorithm.
 
- # download iMapReduce from [Downloads/hadoop-iMapReduce-0.1.tar.gz here].
- # 
+ # Of course, download iMapReduce hadoop-imapreduce-0.1.tar.gz.
+ # To deploy a cluster environment, you can refer to [http://hadoop.apache.org/common/docs/current/ Hadoop Quick Start instructions], if you've never used Hadoop.
+ # The algorithm samples are provided in _algorithms_ directory, you can simply execute shell scripts to run the algorithms including SSSP, PageRank, KMeans, Power of Matrix.
+ # The real data involved in these applications could be found at [http://rio.ecs.umass.edu/~yzhang/data/ http://rio.ecs.umass.edu/~yzhang/data/]
+ 
