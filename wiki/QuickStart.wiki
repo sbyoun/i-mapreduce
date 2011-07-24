@@ -4,5 +4,5 @@
  # To deploy a cluster environment, you can refer to [http://hadoop.apache.org/common/docs/current/ Hadoop Quick Start instructions], if you've never used Hadoop.
  # The algorithm samples are provided in _algorithms_ directory, you can simply execute shell scripts to run the algorithms including SSSP, PageRank, KMeans, Power of Matrix.
  # The real data involved in these applications could be found at [http://rio.ecs.umass.edu/~yzhang/data/ http://rio.ecs.umass.edu/~yzhang/data/]
- # For more details, you can read our [Wiki Wiki] pages.
+ # For more details, you can read our [Wikipage Wikipage].
  
